@@ -5,16 +5,13 @@
     <script src="https://code.jquery.com/jquery-1.11.0.min.js" type="text/javascript" charset="utf-8"></script>
     <style>
         #wow {
-            margin-top: 33px;
-            margin-left: 18px;
-            width: 99%;
-            position: absolute;
             z-index: 1;
-            background-color: transparent;
+            background-color: blue;
         }
 
         #checkmarker {
-            color: green;
+            position: absolute;
+            border-style: solid;
         }
 
         #pdf-js-viewer {
@@ -33,7 +30,7 @@
           <iframe id="pdf-js-viewer" src="web/viewer.html?file=test1.pdf" title="webviewer" frameborder="0" height="600"></iframe>
 
           <div id="wow">
-              <canvas id="checkmarker"></canvas>
+              <canvas id="checkmarker" height="500px" width="500px"></canvas>
           </div>
 
       </div>
