@@ -1,40 +1,83 @@
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     <title>Hello world!</title>
-  </head>
+    <script src="https://code.jquery.com/jquery-1.11.0.min.js" type="text/javascript" charset="utf-8"></script>
+    <style>
+        #wow {
+            margin-top: 33px;
+            margin-left: 18px;
+            width: 99%;
+            position: absolute;
+            z-index: 1;
+            background-color: transparent;
+        }
+
+        #checkmarker {
+            color: green;
+        }
+
+        #pdf-js-viewer {
+            position: absolute;
+            width: 99%;
+            z-index: -1;
+        }
+    </style>
+</head>
   <body style="font-family: Arial, Helvetica, sans-serif;">
-
-    <div style="width:760px;">
-      <h2>About Us</h2>
-      <p>We help software developers do more with PDFs. PDF.js Express gives a flexible and modern UI to your PDF.js viewer while also adding out-of-the-box features like annotations, form filling and signatures.</p>
-
-        <!--
+      <div>
+          <!--
           Place the following <div> element where you want the PDF to be displayed in your website. You can adjust the size using the width and height attributes.
-        -->
-        <div id="pViewer">
-            <iframe id="pdf-js-viewer" src="web/viewer.html?file=test.pdf" title="webviewer" frameborder="0" width="700" height="600"></iframe>
-            
-        </div>
-        <div id="wow">
-            <canvas id="myCanvas" width="648" height="570"></canvas>
-        </div>
+          -->
+          
+          <iframe id="pdf-js-viewer" src="web/viewer.html?file=test1.pdf" title="webviewer" frameborder="0" height="600"></iframe>
 
-    </div>
+          <div id="wow">
+              <canvas id="checkmarker"></canvas>
+          </div>
 
+      </div>
+
+      <script>
+          var canvas, canvas2, ctx, ctx2;
+          var lastEvent;
+          var mouseDown = false;
+
+          function init() {
+              //canvas = document.getElementById("pdf-js-viewer");
+              //ctx = canvas.getContext("2d");
+              canvas2 = document.getElementById("checkmarker");
+              ctx2 = canvas2.getContext("2d");
+              draw2();
+          }
+
+          function draw2() {
+              canvas2.mousedown(function (e) {
+                  lastEvent = e;
+                  mouseDown = true;
+              }).mousemove(function (e) {
+                  // Draw lines
+                  if (mouseDown) {
+                      mouseDown = false;
+                      ctx2.beginPath();
+                      ctx2.moveTo(lastEvent.offsetX, lastEvent.offsetY);
+                      ctx2.lineTo(e.offsetX + 5, e.offsetY + 10);
+                      ctx2.lineTo(e.offsetX + 10, e.offsetY - 20);
+                      ctx2.strokeStyle = 'green';
+                      ctx2.lineWidth = 3;
+                      ctx2.lineCap = 'round';
+                      ctx2.stroke();
+                      lastEvent = e;
+                      
+                  }
+              }).mouseup(function () {
+                  mouseDown = false;
+              }).mouseleave(function () {
+                  canvas2.mouseup();
+              });
+          }
+
+          init();
+      </script>
   </body>
 </html>
-<style>
-#wow{
-  margin-top: 33px;
-  margin-left:18px;
-  position:absolute;
-  z-index:10;
-  background-color: transparent;
-
-}
-#pViewer{
-  position:absolute;
-  z-index:9;
-}
-</style>
