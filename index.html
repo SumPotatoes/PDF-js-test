@@ -10,10 +10,13 @@
         }
         #checkmarker {
             color: green;
+            width: 99%;
+            left:0px;
+            top:0px;
         }
         #pdf-js-viewer {
             position: absolute;
-            width: 700px;
+            width: 100%;
             z-index: -1;
         }
     </style>
@@ -25,53 +28,43 @@
           -->
           
           <iframe id="pdf-js-viewer" src="web/viewer.html?file=test1.pdf" title="webviewer" frameborder="0" height="599"></iframe>
-
           <div id="wow">
-              <canvas id="checkmarker" height="559px" width="678px"></canvas>
+              <canvas id="checkmarker"></canvas>
           </div>
+          
 
       </div>
       
       <script>
           var canvas = document.getElementById("checkmarker");
-              var ctx = canvas.getContext("2d");
+          var ctx = canvas.getContext("2d");
              
-              function getMousePos(canvas, evt) {
+          function getMousePos(canvas, evt) {
         
-                var rect = canvas.getBoundingClientRect();
-                return {
-                  x: evt.clientX - rect.left,
-                    y: evt.clientY - rect.top
-                };
-              }
-
-          function draw2() {
-              canvas2.mousedown(function (e) {
-                  lastEvent = e;
-                  mouseDown = true;
-              }).mousemove(function (e) {
-                  // Draw lines
-                  if (mouseDown) {
-                      mouseDown = false;
-                      ctx2.beginPath();
-                      ctx2.moveTo(lastEvent.offsetX, lastEvent.offsetY);
-                      ctx2.lineTo(e.offsetX + 5, e.offsetY + 10);
-                      ctx2.lineTo(e.offsetX + 10, e.offsetY - 20);
-                      ctx2.strokeStyle = 'green';
-                      ctx2.lineWidth = 3;
-                      ctx2.lineCap = 'round';
-                      ctx2.stroke();
-                      lastEvent = e;
-                      
-                  }
-              }).mouseup(function () {
-                  mouseDown = false;
-              }).mouseleave(function () {
-                  canvas2.mouseup();
-              });
+               var rect = canvas.getBoundingClientRect();
+               return {
+                 x: evt.clientX - rect.left,
+                 y: evt.clientY - rect.top
+               };
           }
 
-          init();
+          canvas.addEventListener("click", function (evt) {
+              var pos = getMousePos(canvas, evt);
+              posx = pos.x;
+              posy = pos.y;
+              var centerX = canvas.width / 2;
+              var centerY = canvas.height / 2;
+              var radius = 50;
+              ctx.globalAlpha = 0.5;
+              ctx.beginPath();
+              ctx.moveTo(posx - 10, posy - 10);
+              ctx.lineTo(posx, posy);
+              ctx.lineTo(posx + 10, posy - 20);
+              ctx.lineWidth = 3;
+              ctx.strokeStyle = '#000';
+              ctx.stroke();
+              ctx.globalAlpha = 1;
+          }, false);
       </script>
       
   </body>
