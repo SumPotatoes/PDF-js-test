@@ -12,7 +12,7 @@
             margin: 40px 0 0 110px;
             left: 20px;
             top: 20px;
-            width:1028px;
+            width:1024px;
         }
         #pdf-js-viewer {
             position: absolute;
@@ -21,13 +21,42 @@
             top:0px;
             z-index: -1;
         }
+        #clear {
+            background: #68B25B;
+            box-shadow: 0 3px 0 0 #6A845F;
+            color: #fff;
+            outline: none;
+            cursor: pointer;
+            text-shadow: 0 1px #6A845F;
+            display: block;
+            font-size: 16px;
+            line-height: 40px;
+            border: none;
+            border-radius: 5px;
+            margin: 10px auto;
+            padding: 0 20px;
+            width: 160px;
+            height: 40px;
+        }
+        .side-tab {
+            position: fixed;
+            z-index: 5;
+            bottom: 20%;
+            right: -71px;
+            padding: 15px 30px;
+            border-radius: 10px 10px 0 0;
+            background-color: #AD2266;
+            color: #ffffff;
+            transform: rotate(-90deg);
+            box-shadow: 0 -3px 7px rgba(0,0,0,0.3);
+        }
     </style>
 </head>
   <body style="font-family: Arial, Helvetica, sans-serif;">
       <div>
           <!--
-            Place the following <div> element where you want the PDF to be displayed in your website. You can adjust the size using the width and height attributes.
-          -->
+    Place the following <div> element where you want the PDF to be displayed in your website. You can adjust the size using the width and height attributes.
+    -->
 
           <iframe id="pdf-js-viewer" src="web/viewer.html?file=test1.pdf" title="webviewer" frameborder="0" height="599"></iframe>
 
@@ -35,11 +64,19 @@
               <canvas id="checkmarker"></canvas>
           </div>
 
+          <div class="side-tab">
+              <p>Points Acquired: <span id="count">0</span></p>
+          </div>
+          
+          <button id="clear" onclick='clear_canvas_width ()'>Clear Checks</button>
+
       </div>
       
       <script>
           var canvas = document.getElementById("checkmarker");
           var ctx = canvas.getContext("2d");
+          var disp = document.getElementById("count");
+          var points = 0;
              
           function getMousePos(canvas, evt) {
         
@@ -65,8 +102,19 @@
               ctx.lineWidth = 3;
               ctx.strokeStyle = "green";
               ctx.stroke();
+              points++;
+              disp.innerHTML = points;
               ctx.globalAlpha = 1;
           }, false);
+
+          function clear_canvas_width() {
+              var s = document.getElementById("checkmarker");
+              var w = s.width;
+              points = 0;
+              s.width = 10;
+              s.width = w;
+              disp.innerHTML = points;
+          }
       </script>
       
   </body>
