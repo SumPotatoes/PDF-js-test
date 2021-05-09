@@ -167,7 +167,7 @@
         $(document).ready(function () {
             $(clickable).click(function (event) {
                 points += increment;
-                document.getElementById("scoreText").innerHTML = "Points Aquired: " + points + "/" + MaxScore;
+                document.getElementById("scoreText").innerHTML = "Points Aquired: " + points;
                 var posx = event.pageX - 15;
                 var posy = event.pageY - 15;
                 $('#chik')
@@ -187,7 +187,7 @@
         });
         function clearPoints() {
             points = 0;
-            document.getElementById("scoreText").innerHTML = "Points Aquired: " + points + "/" + MaxScore;
+            document.getElementById("scoreText").innerHTML = "Points Aquired: " + points;
         }
         function addIncrement() {
             increment++;
