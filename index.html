@@ -30,7 +30,7 @@
         #clear {
             position:absolute;
             margin-top: 630px;
-            margin-left: 50%;
+            margin-left: 45%;
             background: #68B25B;
             box-shadow: 0 3px 0 0 #6A845F;
             color: #fff;
@@ -71,7 +71,7 @@
             height="599"></iframe>
             <img id="chik" src="check.png">
         <div class="side-tab">
-            <p>Points Acquired: <span id="count">0</span></p>
+            <p id="scoreText">Points Acquired: <span id="count">0</span></p>
         </div>
 
         <button id="clear" onclick='clear_canvas_width ()'>Clear Checks</button>
@@ -87,6 +87,7 @@
         $(document).ready(function () {
             $(clickable).click(function (event) {
                 points++;
+                document.getElementById("scoreText").innerHTML = "Points Aquired: " + points;
                 var posx = event.pageX - 15;
                 var posy = event.pageY - 15;
                 $('#chik')
