@@ -6,16 +6,17 @@
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:300' rel='stylesheet' type='text/css'>
     <script src="https://code.jquery.com/jquery-1.11.0.min.js" type="text/javascript" charset="utf-8"></script>
     <style>
-        #clickable{
-            z-index:1;
-            position:absolute;
+        #clickable {
+            z-index: 1;
+            position: absolute;
             margin-top: 30px;
         }
+
         #chik {
-        width: 30px;
-        height: 30px;
-        display: none;
-    }
+            width: 30px;
+            height: 30px;
+            display: none;
+        }
 
         #pdf-js-viewer {
             position: absolute;
@@ -26,7 +27,7 @@
         }
 
         #clear {
-            position:absolute;
+            position: absolute;
             margin-top: 630px;
             margin-left: 45%;
             background: #68B25B;
@@ -44,8 +45,9 @@
             width: 160px;
             height: 40px;
         }
+
         #addInc {
-            position:absolute;
+            position: absolute;
             margin-top: 630px;
             margin-left: 30%;
             background: #dabb0f;
@@ -54,7 +56,7 @@
             outline: none;
             cursor: pointer;
             text-shadow: 0 1px #3d3c02;
-            display:block;
+            display: block;
             font-size: 16px;
             line-height: 40px;
             border: none;
@@ -63,8 +65,9 @@
             width: 160px;
             height: 80px;
         }
+
         #subInc {
-            position:absolute;
+            position: absolute;
             margin-top: 630px;
             margin-left: 65%;
             background: #cf0000;
@@ -73,7 +76,7 @@
             outline: none;
             cursor: pointer;
             text-shadow: 0 1px #030100;
-            display:block;
+            display: block;
             font-size: 16px;
             line-height: 40px;
             border: none;
@@ -82,8 +85,9 @@
             width: 160px;
             height: 80px;
         }
+
         #resetInc {
-            position:absolute;
+            position: absolute;
             margin-top: 710px;
             margin-left: 45%;
             background: #00ccff;
@@ -92,7 +96,7 @@
             outline: none;
             cursor: pointer;
             text-shadow: 0 1px #030100;
-            display:block;
+            display: block;
             font-size: 16px;
             line-height: 40px;
             border: none;
@@ -114,22 +118,36 @@
             transform: rotate(90deg);
             box-shadow: 0 -3px 7px rgba(0, 0, 0, 0.3);
         }
+        .side-tab2 {
+            position: fixed;
+            z-index: 5;
+            bottom: 60%;
+            left: -71px;
+            padding: 15px 30px;
+            border-radius: 10px 10px 0 0;
+            background-color: #AD2266;
+            color: #ffffff;
+            transform: rotate(90deg);
+            box-shadow: 0 -3px 7px rgba(0, 0, 0, 0.3);
+        }
     </style>
 </head>
 
 <body style="font-family: Arial, Helvetica, sans-serif;">
     <div>
-    <canvas id="clickable" width="1314px" height="590px" ></canvas>
-</div>
+        <canvas id="clickable" width="1314px" height="590px"></canvas>
+    </div>
     <div>
         <iframe id="pdf-js-viewer" src="web/viewer.html?file=test1.pdf" title="webviewer" frameborder="0"
             height="599"></iframe>
-            <img id="chik" src="check.png">
+        <img id="chik" src="check.png">
         <div class="side-tab">
             <p id="scoreText">Points Acquired: <span id="count">0</span></p>
+
+        </div>
+        <div class="side-tab2">
             <p id="perCheck">Points/Check: <span id="crement">0</span></p>
         </div>
-
         <button id="clear" onclick='clearPoints()'>Clear Checks</button>
         <button id="addInc" onclick='addIncrement()'>Points per Check + 1</button>
         <button id="subInc" onclick='subIncrement()'>Points per Check - 1</button>
@@ -138,8 +156,8 @@
     </div>
 
     <script>
-       var disp = document.getElementById("count");
-       var disp2 = document.getElementById("crement");
+        var disp = document.getElementById("count");
+        var disp2 = document.getElementById("crement");
         var points = 0;
         var increment = 1;
         var cloneCount = 2;
@@ -166,22 +184,22 @@
                 $('[id^=chik]:last').fadeOut();
             });
         });
-        function clearPoints(){
+        function clearPoints() {
             points = 0;
             document.getElementById("scoreText").innerHTML = "Points Aquired: " + points;
         }
-        function addIncrement(){
+        function addIncrement() {
             increment++;
             document.getElementById("perCheck").innerHTML = "Points/Check: " + increment;
         }
-        function subIncrement(){
+        function subIncrement() {
             increment--;
-            if(increment<1){
+            if (increment < 1) {
                 increment = 1;
             }
             document.getElementById("perCheck").innerHTML = "Points/Check: " + increment;
         }
-        function resetIncrement(){
+        function resetIncrement() {
             increment = 1;
             document.getElementById("perCheck").innerHTML = "Points/Check: " + increment;
         }
