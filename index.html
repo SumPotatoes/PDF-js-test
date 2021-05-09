@@ -63,7 +63,44 @@
             width: 160px;
             height: 80px;
         }
-
+        #subInc {
+            position:absolute;
+            margin-top: 630px;
+            margin-left: 65%;
+            background: #cf0000;
+            box-shadow: 0 3px 0 0 #880000;
+            color: #fff;
+            outline: none;
+            cursor: pointer;
+            text-shadow: 0 1px #030100;
+            display:block;
+            font-size: 16px;
+            line-height: 40px;
+            border: none;
+            border-radius: 5px;
+            padding: 0 20px;
+            width: 160px;
+            height: 80px;
+        }
+        #resetInc {
+            position:absolute;
+            margin-top: 710px;
+            margin-left: 45%;
+            background: #00ccff;
+            box-shadow: 0 3px 0 0 #006875b0;
+            color: #fff;
+            outline: none;
+            cursor: pointer;
+            text-shadow: 0 1px #030100;
+            display:block;
+            font-size: 16px;
+            line-height: 40px;
+            border: none;
+            border-radius: 5px;
+            padding: 0 20px;
+            width: 160px;
+            height: 80px;
+        }
 
         .side-tab {
             position: fixed;
@@ -94,6 +131,8 @@
 
         <button id="clear" onclick='clearPoints()'>Clear Checks</button>
         <button id="addInc" onclick='addIncrement()'>Points per Check + 1</button>
+        <button id="subInc" onclick='subIncrement()'>Points per Check - 1</button>
+        <button id="resetInc" onclick='resetIncrement()'>Reset Points per Check</button>
 
     </div>
 
@@ -131,6 +170,15 @@
         }
         function addIncrement(){
             increment++;
+        }
+        function subIncrement(){
+            increment--;
+            if(increment<1){
+                increment = 1;
+            }
+        }
+        function resetIncrement(){
+            increment = 1;
         }
     </script>
 
