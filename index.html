@@ -6,19 +6,14 @@
     <script src="https://code.jquery.com/jquery-1.11.0.min.js" type="text/javascript" charset="utf-8"></script>
     <style>
         #wow {
-            margin-top: 33px;
-            margin-left: 18px;
-            width: 99%;
-            position: absolute;
             z-index: 1;
-            background-color: transparent;
         }
         #checkmarker {
-            z-index: 0;
+            color: green;
         }
         #pdf-js-viewer {
             position: absolute;
-            width: 99%;
+            width: 700px;
             z-index: -1;
         }
     </style>
@@ -32,70 +27,51 @@
           <iframe id="pdf-js-viewer" src="web/viewer.html?file=test1.pdf" title="webviewer" frameborder="0" height="599"></iframe>
 
           <div id="wow">
-              <canvas id="checkmarker" onmouseover="mouseDown(event)"></canvas>
+              <canvas id="checkmarker" height="559px" width="678px"></canvas>
           </div>
 
       </div>
       
       <script>
-          var $canvas = $("canvas");
-          var ctx = $canvas[0].getContext("2d");
-          var lastEvent;
+          var canvas = document.getElementById("checkmarker");
+              var ctx = canvas.getContext("2d");
+             
+              function getMousePos(canvas, evt) {
+        
+                var rect = canvas.getBoundingClientRect();
+                return {
+                  x: evt.clientX - rect.left,
+                    y: evt.clientY - rect.top
+                };
+              }
 
-          function mouseDown(event) {
-              var cx = event.offsetX;
-              var cy = event.offsetY;
-              var initx = cx;
-              var inity = cy;
-
-              ctx.beginPath();
-              ctx.moveTo(initx, inity);
-              ctx.lineTo(cx + 5, cy + 10);
-              ctx.lineTo(cx + 10, cy - 20);
-              ctx.strokeStyle = "green";
-              ctx.lineWidth = 3;
-              ctx.lineCap = 'round';
-              ctx.stroke();
+          function draw2() {
+              canvas2.mousedown(function (e) {
+                  lastEvent = e;
+                  mouseDown = true;
+              }).mousemove(function (e) {
+                  // Draw lines
+                  if (mouseDown) {
+                      mouseDown = false;
+                      ctx2.beginPath();
+                      ctx2.moveTo(lastEvent.offsetX, lastEvent.offsetY);
+                      ctx2.lineTo(e.offsetX + 5, e.offsetY + 10);
+                      ctx2.lineTo(e.offsetX + 10, e.offsetY - 20);
+                      ctx2.strokeStyle = 'green';
+                      ctx2.lineWidth = 3;
+                      ctx2.lineCap = 'round';
+                      ctx2.stroke();
+                      lastEvent = e;
+                      
+                  }
+              }).mouseup(function () {
+                  mouseDown = false;
+              }).mouseleave(function () {
+                  canvas2.mouseup();
+              });
           }
 
-
-          /*
-          // On mouse events on the canvas
-          $canvas.mousedown(function (e) {
-              lastEvent = e;
-              mouseDown = true;
-          }).mousemove(function (e) {
-              // Draw lines
-              if (mouseDown) {
-                  ctx.beginPath();
-                  ctx.moveTo(lastEvent.offsetX, lastEvent.offsetY);
-                  ctx.lineTo(e.offsetX + 5, e.offsetY + 10);
-                  ctx.lineTo(e.offsetX + 10, e.offsetY - 20);
-                  ctx.strokeStyle = "green";
-                  ctx.lineWidth = 3;
-                  ctx.lineCap = 'round';
-                  ctx.stroke();
-                  lastEvent = e;
-                  mouseDown = false;
-
-              }
-          }).mouseup(function () {
-              mouseDown = false;
-          }).mouseleave(function () {
-              $canvas.mouseup();
-          });
-          */
-
-          /*
-          ctx.beginPath();
-          ctx.moveTo(100, 100);
-          ctx.lineTo(105, 110);
-          ctx.lineTo(115, 90);
-          ctx.lineWidth = 3;
-          ctx.lineCap = 'round';
-          ctx.strokeStyle = 'green';
-          ctx.stroke();
-          */
+          init();
       </script>
       
   </body>
