@@ -1,26 +1,25 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>PDF Checker for Teachers</title>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:300' rel='stylesheet' type='text/css'>
     <script src="https://code.jquery.com/jquery-1.11.0.min.js" type="text/javascript" charset="utf-8"></script>
     <style>
-        #wow {
-            z-index: 1;
-            /* background-color: blue;
-            opacity:0.3; */
-            margin: 40px 0 0 110px;
-            /* left: 20px;
-            top: 20px; */
-        }
-        
+        #chik {
+        width: 30px;
+        height: 30px;
+        display: none;
+    }
+
         #pdf-js-viewer {
             position: absolute;
             width: 100%;
-            left:0px;
-            top:0px;
+            left: 0px;
+            top: 0px;
             z-index: -1;
         }
+
         #clear {
             background: #68B25B;
             box-shadow: 0 3px 0 0 #6A845F;
@@ -38,6 +37,7 @@
             width: 160px;
             height: 40px;
         }
+
         .side-tab {
             position: fixed;
             z-index: 5;
@@ -48,74 +48,51 @@
             background-color: #AD2266;
             color: #ffffff;
             transform: rotate(-90deg);
-            box-shadow: 0 -3px 7px rgba(0,0,0,0.3);
+            box-shadow: 0 -3px 7px rgba(0, 0, 0, 0.3);
         }
     </style>
 </head>
-  <body style="font-family: Arial, Helvetica, sans-serif;">
-      <div>
-          <!--
-    Place the following <div> element where you want the PDF to be displayed in your website. You can adjust the size using the width and height attributes.
-    -->
 
-          <iframe id="pdf-js-viewer" src="web/viewer.html?file=test1.pdf" title="webviewer" frameborder="0" height="599"></iframe>
+<body style="font-family: Arial, Helvetica, sans-serif;">
+    <div>
+        <iframe id="pdf-js-viewer" src="web/viewer.html?file=test1.pdf" title="webviewer" frameborder="0"
+            height="599"></iframe>
+            <img id="chik" src="check.png">
+        <div class="side-tab">
+            <p>Points Acquired: <span id="count">0</span></p>
+        </div>
 
-          <div id="wow">
-              <canvas id="checkmarker" width="1024px" height="600px"></canvas>
-          </div>
+        <button id="clear" onclick='clear_canvas_width ()'>Clear Checks</button>
 
-          <div class="side-tab">
-              <p>Points Acquired: <span id="count">0</span></p>
-          </div>
-          
-          <button id="clear" onclick='clear_canvas_width ()'>Clear Checks</button>
+    </div>
 
-      </div>
-      
-      <script>
-          var canvas = document.getElementById("checkmarker");
-          var ctx = canvas.getContext("2d");
-          var disp = document.getElementById("count");
-          var points = 0;
-             
-          function getMousePos(canvas, evt) {
-        
-               var rect = canvas.getBoundingClientRect();
-               return {
-                 x: evt.clientX - rect.left,
-                 y: evt.clientY - rect.top
-               };
-          }
+    <script>
+       var disp = document.getElementById("count");
+        var points = 0;
+        var cloneCount = 2;
+        var img = document.getElementById("chik");
 
-          canvas.addEventListener("click", function (evt) {
-              var pos = getMousePos(canvas, evt);
-              posx = pos.x;
-              posy = pos.y;
-              var centerX = canvas.width / 2;
-              var centerY = canvas.height / 2;
-              var radius = 50;
-              ctx.globalAlpha = 3;
-              ctx.beginPath();
-              ctx.moveTo(posx - 10,posy -10);
-              ctx.lineTo(posx,posy);
-              ctx.lineTo(posx + 10,posy - 20);
-              ctx.lineWidth = 5;
-              ctx.strokeStyle = '#000';
-              ctx.stroke();    
-              points++;
-              disp.innerHTML = points;
-              ctx.globalAlpha = 1;
-          }, false);
+        $(document).ready(function () {
+            $(document).click(function (event) {
+                var posx = event.clientX - 15;
+                var posy = event.clientY - 15;
+                $('#chik')
+                    .clone()
+                    .attr('id', 'chik' + cloneCount++)
+                    .insertAfter($('[id^=chik]:last'))
+                    .css({
+                        position: 'absolute',
+                        top: posy,
+                        left: posx
+                    })
+                    .width("30px")
+                    .height("30px");
+                $('[id^=chik]:last').fadeOut();
+            });
+        });
 
-          function clear_canvas_width() {
-              var s = document.getElementById("checkmarker");
-              var w = s.width;
-              points = 0;
-              s.width = 10;
-              s.width = w;
-              disp.innerHTML = points;
-          }
-      </script>
-      
-  </body>
+    </script>
+
+</body>
+
 </html>
