@@ -13,10 +13,7 @@
             left: 20px;
             top: 20px;
         }
-        #checkmarker {
-        /* width:1024px; */
-            
-        }
+        
         #pdf-js-viewer {
             position: absolute;
             width: 100%;
@@ -91,6 +88,7 @@
           }
 
           canvas.addEventListener("click", function (evt) {
+              alert("qwe");
               var pos = getMousePos(canvas, evt);
               posx = pos.x;
               posy = pos.y;
