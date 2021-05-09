@@ -9,14 +9,16 @@
             z-index: 1;
         }
         #checkmarker {
-            color: green;
-            width: 99%;
-            left:0px;
-            top:0px;
+            margin: 40px 0 0 110px;
+            left: 20px;
+            top: 20px;
+            width:1028px;
         }
         #pdf-js-viewer {
             position: absolute;
             width: 100%;
+            left:0px;
+            top:0px;
             z-index: -1;
         }
     </style>
@@ -24,14 +26,14 @@
   <body style="font-family: Arial, Helvetica, sans-serif;">
       <div>
           <!--
-          Place the following <div> element where you want the PDF to be displayed in your website. You can adjust the size using the width and height attributes.
+            Place the following <div> element where you want the PDF to be displayed in your website. You can adjust the size using the width and height attributes.
           -->
-          
+
           <iframe id="pdf-js-viewer" src="web/viewer.html?file=test1.pdf" title="webviewer" frameborder="0" height="599"></iframe>
+
           <div id="wow">
               <canvas id="checkmarker"></canvas>
           </div>
-          
 
       </div>
       
@@ -57,11 +59,11 @@
               var radius = 50;
               ctx.globalAlpha = 0.5;
               ctx.beginPath();
-              ctx.moveTo(posx - 10, posy - 10);
+              ctx.moveTo(posx - 20, posy + 10);
+              ctx.lineTo(posx - 10, posy + 20);
               ctx.lineTo(posx, posy);
-              ctx.lineTo(posx + 10, posy - 20);
               ctx.lineWidth = 3;
-              ctx.strokeStyle = '#000';
+              ctx.strokeStyle = "green";
               ctx.stroke();
               ctx.globalAlpha = 1;
           }, false);
