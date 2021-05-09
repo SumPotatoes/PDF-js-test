@@ -75,8 +75,9 @@
 
         $(document).ready(function () {
             $(document).click(function (event) {
-                var posx = event.clientX - 15;
-                var posy = event.clientY - 15;
+                points++;
+                var posx = event.pageX - 15;
+                var posy = event.pageY - 15;
                 $('#chik')
                     .clone()
                     .attr('id', 'chik' + cloneCount++)
