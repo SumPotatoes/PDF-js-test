@@ -73,6 +73,7 @@
         </div>
 
         <button id="clear" onclick='clearPoints()'>Clear Checks</button>
+        <button id="addInc" onclick='addIncrement()'>Points per Check + 1</button>
 
     </div>
 
@@ -106,6 +107,7 @@
         });
         function clearPoints(){
             points = 0;
+            document.getElementById("scoreText").innerHTML = "Points Aquired: " + points;
         }
     </script>
 
