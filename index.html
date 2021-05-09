@@ -72,19 +72,20 @@
             <p id="scoreText">Points Acquired: <span id="count">0</span></p>
         </div>
 
-        <button id="clear" onclick='clear_canvas_width ()'>Clear Checks</button>
+        <button id="clear" onclick='clearPoints()'>Clear Checks</button>
 
     </div>
 
     <script>
        var disp = document.getElementById("count");
         var points = 0;
+        var increment = 1;
         var cloneCount = 2;
         var img = document.getElementById("chik");
 
         $(document).ready(function () {
             $(clickable).click(function (event) {
-                points++;
+                points += increment;
                 document.getElementById("scoreText").innerHTML = "Points Aquired: " + points;
                 var posx = event.pageX - 15;
                 var posy = event.pageY - 15;
@@ -103,7 +104,9 @@
                 $('[id^=chik]:last').fadeOut();
             });
         });
-
+        function clearPoints(){
+            points = 0;
+        }
     </script>
 
 </body>
