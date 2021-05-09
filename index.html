@@ -146,7 +146,7 @@
 
         </div>
         <div class="side-tab2">
-            <p id="perCheck">Points/Check: <span id="crement">0</span></p>
+            <p id="perCheck">Points/Check: <span id="crement">1</span></p>
         </div>
         <button id="clear" onclick='clearPoints()'>Clear Checks</button>
         <button id="addInc" onclick='addIncrement()'>Points per Check + 1</button>
@@ -156,6 +156,8 @@
     </div>
 
     <script>
+        var maxScore = prompt("Please Input the Max Score:");
+        document.getElementById("scoreText").innerHTML = "Points Aquired: " + points + "/" + MaxScore;
         var disp = document.getElementById("count");
         var disp2 = document.getElementById("crement");
         var points = 0;
@@ -166,7 +168,7 @@
         $(document).ready(function () {
             $(clickable).click(function (event) {
                 points += increment;
-                document.getElementById("scoreText").innerHTML = "Points Aquired: " + points;
+                document.getElementById("scoreText").innerHTML = "Points Aquired: " + points + "/" + MaxScore;
                 var posx = event.pageX - 15;
                 var posy = event.pageY - 15;
                 $('#chik')
@@ -186,7 +188,7 @@
         });
         function clearPoints() {
             points = 0;
-            document.getElementById("scoreText").innerHTML = "Points Aquired: " + points;
+            document.getElementById("scoreText").innerHTML = "Points Aquired: " + points + "/" + MaxScore;
         }
         function addIncrement() {
             increment++;
